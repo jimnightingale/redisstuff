@@ -36,3 +36,26 @@ echo ** edit bind address in /etc/redis/redis.conf
 ## slave-read-only yes
 ## repl-diskless-sync no
 ## repl-disable-tcp-nodelay no
+
+# copy sentinel.conf to /etc/redis/sentinel.conf
+# sentinel conf
+## protected-mode no
+## port 26379
+## dir /tmp
+## sentinel monitor redis1 10.240.0.2 6379 2
+## sentinel down-after-milliseconds redis1 5000
+## sentinel parallel-syncs redis1 1
+## sentinel failover-timeout redis1 180000
+
+# hack
+# /etc/systemd/system/sentinel.service
+## [Unit]
+## Description=Redis Sentinel - Redis failover
+## After=network.target
+## [Service]
+## ExecStart=/usr/local/bin/redis-sentinel /etc/redis/sentinel.conf
+## ExecStop=/usr/bin/pkill redis-sentinel
+## [Install]
+## WantedBy=multi-user.target
+
+
