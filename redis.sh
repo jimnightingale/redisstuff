@@ -34,8 +34,9 @@ echo ** edit bind address in /etc/redis/redis.conf
 ## slave-serve-stale-data no #if master is down then no data is served
 ## slave-serve-stale-data yes
 ## slave-read-only yes
-## repl-diskless-sync no
+## repl-diskless-sync no #diskless repl is experimental at the moment
 ## repl-disable-tcp-nodelay no
+
 
 # copy sentinel.conf to /etc/redis/sentinel.conf
 # sentinel conf
